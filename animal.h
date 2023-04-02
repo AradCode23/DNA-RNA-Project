@@ -6,14 +6,13 @@
 #include <vector>
 #include "cell.h"
 
-class Animal {
+class Animal : public Cell {
 public:
     Animal(const std::vector<Cell>& chromosomes);
     double geneticDistance(const Animal& other) const;
     bool operator==(const Animal& other) const;
     Animal asexualReproduction() const;
     Animal operator+(const Animal& other) const;
-    void apoptosis();
 
 private:
     std::vector<Cell> chromosomes;
