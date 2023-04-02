@@ -113,3 +113,8 @@ const std::pair<std::string, std::string> &Genome::getDna() const {
 }
 
 Genome::Genome(const std::string &rna, const std::pair<std::string, std::string> &dna) : rna(rna), dna(dna) {}
+
+void Genome::display() const {
+    std::cout << "RNA: " << rna << std::endl;
+    std::cout << "DNA: " << dna.first << ", " << dna.second << std::endl;
+}

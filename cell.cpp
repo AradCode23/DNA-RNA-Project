@@ -1,39 +1,50 @@
 #include "cell.h"
+#include <iostream>
+#include <algorithm>
+#include <utility>
+
+Cell::Cell() {}
 
 Cell::Cell(const std::vector<Genome> &chromosomes)
         : chromosomeCount(chromosomeCount), chromosomes(chromosomes) {
     chromosomeCount = chromosomes.size();
 }
 
-bool Cell::apoptosis() {
-    for (const auto& chromosome : chromosomes) {
-        int unbondedCount = 0;
-        int atCount = 0;
-        int cgCount = 0;
 
-        const auto& pair = chromosome.getDna();
-        for (size_t i = 0; i < pair.first.size(); ++i) {
-            if ((pair.first[i] == 'A' && pair.second[i] != 'T') ||
-                (pair.first[i] == 'T' && pair.second[i] != 'A') ||
-                (pair.first[i] == 'C' && pair.second[i] != 'G') ||
-                (pair.first[i] == 'G' && pair.second[i] != 'C')) {
-                ++unbondedCount;
-            }
+bool Cell::shouldApoptose() const {
+    return std::any_of(chromosomes.begin(), chromosomes.end(), [](const Genome &chromosome) {
+        std::size_t noBondCount = 0;
+        std::size_t atPairCount = 0;
+        std::size_t cgPairCount = 0;
 
-            if ((pair.first[i] == 'A' && pair.second[i] == 'T') ||
-                (pair.first[i] == 'T' && pair.second[i] == 'A')) {
-                ++atCount;
+        std::pair<std::string, std::string> dna = chromosome.getDna();
+        std::size_t dnaSize = dna.first.size();
+
+        for (std::size_t i = 0; i < dnaSize; i++) {
+            char firstStrandNucleotide = dna.first[i];
+            char secondStrandNucleotide = dna.second[i];
+
+            if ((firstStrandNucleotide == 'A' && secondStrandNucleotide == 'T') ||
+                (firstStrandNucleotide == 'T' && secondStrandNucleotide == 'A')) {
+                atPairCount++;
+            } else if ((firstStrandNucleotide == 'C' && secondStrandNucleotide == 'G') ||
+                       (firstStrandNucleotide == 'G' && secondStrandNucleotide == 'C')) {
+                cgPairCount++;
             } else {
-                ++cgCount;
+                noBondCount++;
             }
         }
 
-        if (unbondedCount > 5 || atCount > 3 * cgCount) {
-            return true;
-        }
-    }
+        return noBondCount > 5 || atPairCount > 3 * cgPairCount;
+    });
+}
 
-    return false;
+void Cell::apoptosis() {
+    auto newEnd = std::remove_if(chromosomes.begin(), chromosomes.end(), [this](const Genome &chromosome) {
+        return shouldApoptose();
+    });
+
+    chromosomes.erase(newEnd, chromosomes.end());
 }
 
 
@@ -94,4 +105,9 @@ std::vector<std::string> Cell::findComplementPalindromes(int n)
     return result;
 }
 
-Cell::Cell() {}
+void Cell::display() const {
+    std::cout << "Cell content:" << std::endl;
+    for (const auto& chromosome : chromosomes) {
+        chromosome.display();
+    }
+}

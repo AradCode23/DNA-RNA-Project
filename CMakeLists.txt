@@ -10,6 +10,8 @@ add_executable(DNA_RNA_Project
         app.cpp
         genome.cpp
         cell.cpp
+        animal.cpp
         genome_factory.cpp
         cell_factory.cpp
+        animal_factory.cpp
         dna_utils.cpp)

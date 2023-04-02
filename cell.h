@@ -11,10 +11,12 @@ public:
 
     Cell();
 
-    bool apoptosis();
+    bool shouldApoptose() const;
+    virtual void apoptosis();
     void bigMutation(const std::string &S1, int n, const std::string &S2, int m);
     void subtleMutation(char n1, char n2, int n, int m);
     void reverseMutation(const std::string &S1, int n);
+    void display() const override;
     std::vector<std::string> findComplementPalindromes(int n);
 
 private:

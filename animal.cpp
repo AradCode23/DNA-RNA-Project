@@ -1,7 +1,9 @@
 #include <algorithm>
 #include <stdexcept>
+#include <iostream>
 #include <random>
 #include "animal.h"
+
 
 Animal::Animal(const std::vector<Cell>& chromosomes) : chromosomes(chromosomes) {}
 
@@ -20,11 +22,11 @@ double Animal::geneticDistance(const Animal& other) const {
         const Cell& chromosome1 = chromosomes[i];
         const Cell& chromosome2 = other.chromosomes[i];
 
-        for (size_t j = 0; j < chromosome1.getDNA().first.size(); ++j) {
-            if (chromosome1.getDNA().first[j] == chromosome2.getDNA().first[j]) {
+        for (size_t j = 0; j < chromosome1.getDna().first.size(); ++j) {
+            if (chromosome1.getDna().first[j] == chromosome2.getDna().first[j]) {
                 intersection_count++;
             }
-            if (chromosome1.getDNA().first[j] != 'X' || chromosome2.getDNA().first[j] != 'X') {
+            if (chromosome1.getDna().first[j] != 'X' || chromosome2.getDna().first[j] != 'X') {
                 union_count++;
             }
         }
@@ -108,4 +110,11 @@ void Animal::apoptosis() {
 
 bool Animal::isValidReproduction(const Animal& offspring, const Animal& parent) const {
     return offspring.geneticDistance(parent) > 0.7;
+}
+
+void Animal::display() const {
+    std::cout << "Animal content:" << std::endl;
+    for (const auto& chromosome : chromosomes) {
+        chromosome.display();
+    }
 }
