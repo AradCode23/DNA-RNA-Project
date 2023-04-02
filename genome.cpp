@@ -1,5 +1,4 @@
 #include "genome.h"
-#include "dna_utils.h"
 #include <iostream>
 #include <algorithm>
 
@@ -11,7 +10,7 @@ void Genome::receiveContent(const std::string &rna, const std::pair<std::string,
     this->dna = dna;
 }
 
-void Genome::createDNAfromRNA() {
+void Genome::createDnaFromRna() {
     // Convert RNA to DNA (using T instead of U)
     std::string dna_strand = rna;
     for (char& base : dna_strand) {
@@ -112,3 +111,5 @@ const std::string &Genome::getRna() const {
 const std::pair<std::string, std::string> &Genome::getDna() const {
     return dna;
 }
+
+Genome::Genome(const std::string &rna, const std::pair<std::string, std::string> &dna) : rna(rna), dna(dna) {}

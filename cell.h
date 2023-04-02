@@ -2,11 +2,12 @@
 #define DNA_RNA_PROJECT_CELL_H
 
 #include "genome.h"
+#include "dna_utils.h"
 
 class Cell : public Genome
 {
 public:
-    Cell(int chromosomeCount, const std::vector<Genome> &chromosomes);
+    Cell(const std::vector<Genome> &chromosomes);
 
     Cell();
 

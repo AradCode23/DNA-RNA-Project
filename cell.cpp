@@ -1,7 +1,9 @@
 #include "cell.h"
 
-Cell::Cell(int chromosomeCount, const std::vector<Genome> &chromosomes)
-        : chromosomeCount(chromosomeCount), chromosomes(chromosomes) {}
+Cell::Cell(const std::vector<Genome> &chromosomes)
+        : chromosomeCount(chromosomeCount), chromosomes(chromosomes) {
+    chromosomeCount = chromosomes.size();
+}
 
 bool Cell::apoptosis() {
     for (const auto& chromosome : chromosomes) {
