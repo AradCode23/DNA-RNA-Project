@@ -10,5 +10,7 @@
 
 char complement(char base);
 
+std::string complement(const std::string& base);
+
 
 #endif //DNA_RNA_PROJECT_DNA_UTILS_H

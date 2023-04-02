@@ -16,6 +16,7 @@ public:
     Animal asexualReproduction() const;
     Animal operator+(const Animal& other) const;
     void apoptosis() override;
+    const std::vector<Cell> &getChromosomes() const;
 
 private:
     std::vector<Cell> chromosomes;

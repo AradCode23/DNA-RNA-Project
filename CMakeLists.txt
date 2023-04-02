@@ -11,6 +11,7 @@ add_executable(DNA_RNA_Project
         genome.cpp
         cell.cpp
         animal.cpp
+        virus.cpp
         genome_factory.cpp
         cell_factory.cpp
         animal_factory.cpp

@@ -8,6 +8,7 @@
 #include "genome.h"
 #include "cell.h"
 #include "animal.h"
+#include "virus.h"
 
 class App {
 public:
@@ -26,6 +27,7 @@ private:
     Genome genome;
     Cell cell;
     Animal animal;
+    Virus virus;
 
     void printMainMenu();
 

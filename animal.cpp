@@ -118,3 +118,7 @@ void Animal::display() const {
         chromosome.display();
     }
 }
+
+const std::vector<Cell> &Animal::getChromosomes() const {
+    return chromosomes;
+}

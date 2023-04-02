@@ -64,6 +64,7 @@ void App::printSubMenu(const std::string &menuTitle) {
         std::cout << "3. Perform subtle mutation\n";
         std::cout << "4. Perform big mutation\n";
         std::cout << "5. Perform reverse mutation\n";
+        std::cout << "6. Perform cell apoptosis\n";
     } else if (menuTitle == "Genome") {
         std::cout << "1. Create a Genome\n";
         std::cout << "2. Create DNA from RNA\n";
@@ -282,6 +283,29 @@ void App::handleAnimalMenu() {
                 Animal offspring = animal + otherAnimal;
                 std::cout << "Offspring animal content:\n";
                 offspring.display();
+                break;
+            }
+            case 5: {
+                std::cout << "Creating a new animal using AnimalFactory for reproduction...\n";
+                AnimalFactory factory;
+                Animal otherAnimal = factory.createObject();
+                std::cout << "Created animal content:\n";
+                otherAnimal.display();
+                Animal offspring = animal + otherAnimal;
+                std::cout << "Offspring animal content:\n";
+                offspring.display();
+                break;
+            }
+            case 6: {
+                std::cout << "Enter virus RNA: ";
+                std::string virusRNA;
+                std::cin >> virusRNA;
+                virus.setRna(virusRNA);
+                if (virus.isHarmful(animal)) {
+                    std::cout << "The virus is harmful to the animal.\n";
+                } else {
+                    std::cout << "The virus is not harmful to the animal.\n";
+                }
                 break;
             }
             case 0: {
